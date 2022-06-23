@@ -13,13 +13,13 @@ def generate_data(starttime, data_size: int, wait_time: int):
     answer = b64encode(os.urandom(data_size*1024*1024)).decode('utf-8')
     delta = datetime.utcnow() - starttime
     if delta.seconds < wait_time:
-        return generate_data(starttime, data_size)
+        return generate_data(starttime, data_size, wait_time)
     return answer
 
 
 @app.route('/')
 def main():
     starttime = datetime.utcnow()
-    return generate_data(starttime, data_size)
+    return generate_data(starttime, data_size, wait_time)
 
 
